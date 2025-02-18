@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnetar Media</title>
+
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Dark theme and red accents -->
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #1a202c; /* Dark background */
+      color: #ffffff; /* White text */
+    }
+    .bg-secondary {
+      background-color: #2d3748; /* Darker gray */
+    }
+    .text-indigo-400 {
+      color: #e53e3e; /* Red accent color */
+    }
+    .hover\:text-indigo-400:hover {
+      color: #e53e3e;
+    }
+    .hover\:bg-indigo-500:hover {
+      background-color: #9b2c2c; /* Darker red on hover */
+    }
+     .bg-gradient {
+      background-image: linear-gradient(to bottom, rgba(45, 55, 72, 0.8), rgba(26, 32, 44, 0.8));
+    }
+
+   /* Simple cube animation */
+    .cube {
+        width: 40px;
+        height: 40px;
+        background-color: #e53e3e;
+        position: absolute;
+        animation: cube 4s ease-in-out infinite;
+        opacity: 0.3;
+      }
+    .cube:nth-child(2) {
+        animation-delay: 0.5s;
+        left: 50%;
+        top: 15%;
+    }
+     .cube:nth-child(3) {
+        animation-delay: 1s;
+        left: 25%;
+        top: 75%;
+    }
+    .cube:nth-child(4) {
+        animation-delay: 1.5s;
+        left: 75%;
+        top: 35%;
+    }
+    .cube:nth-child(5) {
+        animation-delay: 2s;
+        left: 10%;
+        top: 50%;
+    }
+
+    @keyframes cube {
+        from {
+            transform: scale(0) rotate(0deg) translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 0.3;
+        }
+        50% {
+          transform: scale(1) rotate(360deg) translate(-50%, -50%);
+          opacity: 0.1;
+        }
+        to {
+            transform: scale(0) rotate(720deg) translate(-50%, -50%);
+            opacity: 0;
+        }
+    }
+
+  </style>
+</head>
+<body class="text-gray-200">
+  <!-- Header -->
+  <header id="header" class="bg-secondary">
+    <nav class="container mx-auto flex justify-start items-center py-8 px-4">
+      <!-- App Name -->
+      <a class="text-3xl text-indigo-400 font-bold uppercase mr-4" href="index.html">Magnetar Media</a>
+
+      <div class="flex flex-grow items-center">
+        <!-- Primary Navigation -->
+        <ul class="flex flex-row mt-1">
+          <!-- Navigation Links -->
+          <li>
+            <a class="px-2" href="#">Login / Register</a>
+          </li>
+          <li>
+            <a class="px-2" href="#">Manage</a>
+          </li>
+          <li>
+            <a class="px-2" href="#">Upload</a>
+          </li>
+          <li>
+            <a class="px-2" href="about.html">About</a>
+          </li>
+        </ul>
+        <!-- Language Switcher -->
+        <ul class="flex flex-row ml-auto">
+          <li>
+            <a href="#">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAA1CAMAAACA7r40AAAA/FBMVEWyIjNPN2Y8O27///8/PnBOTXxycpY9PG9RUX5HR3dIR3dLSnlPTny4uMpWVYFFRHVwb5VlZIx7e52DgqOIh6aIiKc+PXBJSHhTUn9hYYqyIjReXohgX4lYV4Lr6/C2tcjPdYB0c5haWYRYV4Nra5GJiac+PW/FxdTHYG1RUH3eoajltbtOTXvty89BQHHg3+hSUX6GYoC6usyVlbFycZa7u8yUk6+sq8FCQXO0tMe1tMhiYYpMS3pDQnNvbpTExNN8fJ7GxdTGxtWCgqLHx9WXlrLXi5SYl7Kiobrg4Oiiorrn5u3n5+2jo7ukpLvw8PTx8fX09Pf19firqsC5sMNxAAAAAnRSTlPQ9qN1Xw4AAAGlSURBVHhe7ZXFiiRBFEVjznvp5W7t7j3u7m7//y8D1dAMGbnI4jW5KOpsgjibCxFcrrtVEmcBGAGQJHB98d3EgEM/ygsg/nwRAy15rxQ4Ywh3JQX49hVgKA/Ad1hDkkGTMSQJjGkOEmo133FmwAEQyl8FfSj3gFgkzjsQAw6AZ796AP2fGcDBS8/ZQ7ZQlJ2d+bEFqp6zhuh9Cf9/pDtKkTs04KBTD4jgx3eICOodoshz1p7M6UUAUQ+Ap2Pf2UMI5UBBX18/Ut7ZQ84Jui10QKsbcA7dt77jxIBDt+sxMNzrD4HL+rZS4Iw9iTZkCjRFmsBUHkcUOGMI7dkpKezuQsrprM3zR76zN572ekdBX623gaONJ0d5B5sGHAA1+QTwRQJgX2Q/7+w9GZGlDZKERpoxgkbDc8s0WscGSo+WGMiNVlgwWuFNjdafPsDe7wzg3RvP2UNCFGVtbX6EoOo7PhgoO1rGnswHiquB4mqgfIcxpBTGkNslMf2JVMAShRxXgJtUwBKFbFbAqicL4U4qYNWThXCHFbDqyUK4swpY9WQhXBX8A2rVjaQ6HWXmAAAAAElFTkSuQmCC"
+                alt="en" width="22" height="14" class="inline-block">
+              <span class="ml-1">English</span>
+            </a>
+          </li>
+          <li style="display: none;">  <!--  Hidden by default -->
+            <a href="#">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABDBAMAAACYZb3pAAAAHlBMVEUpQqK2q8384OL3qa/tKTkAI5Wrt9z////5t7ztKTlzpJCAAAAABXRSTlP++vjs1BQWlgsAAAAxSURBVHgBYmRAA4yKaAJCAugqQgHtyzENAAAAAiD7pzaDr4MfRVEURVGU36IoipK5FLWNJ6UFusbWAAAAAElFTkSuQmCC"
+                alt="fr" width="22" height="14" class="inline-block">
+                <span class="ml-1">French</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Intro Section -->
+  <section class="relative overflow-hidden mb-2">
+    <!-- Removed the video element -->
+
+    <div class="bg-gradient absolute w-full h-full z-40 opacity-60"></div>
+
+    <div class="w-full h-full absolute z-40">
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+    </div>
+
+    <div class="container mx-auto relative z-50">
+      <div class="text-center px-20 py-60 w-full md:w-8/12 mx-auto">
+        <!-- Changed text to focus on professional marketers -->
+        <h1 class="text-7xl font-bold uppercase mb-2">Magnetar Media Share</h1>
+        <p class="text-xl"> <!-- Increased font size for better readability -->
+          Built for professional marketers to share video clips, marketing tools, tutorials,
+          and everything you need to know for marketing and life coach development.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="container mx-auto">
+    <!-- Changed heading to reflect professional content -->
+    <h1 class="uppercase text-center text-4xl grid mt-20 mb-12 items-center gap-8 tracking-widest latest">Latest Content</h1>
+
+    <!-- Clips List -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">  <!-- Mobile-first grid -->
+      <!-- Example 1 -->
+      <a href="#"
+        class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+
+        <!-- Image -->
+        <img class="card-img-top rounded-tl-2xl w-full max-w-full h-auto" src="https://firebasestorage.googleapis.com/v0/b/ces-project-f8b4e.firebasestorage.app/o/received_1123500849088555.png?alt=media&token=0857c883-5442-4383-8d94-78d92b2c1cb9" alt="Marketing Tutorial by Mentor Genesis">
+
+        <!-- Shape -->
+        <div class="relative">
+          <div class="absolute pointer-events-none bottom-full w-full bg-secondary text-white">
+            <div class="absolute bottom-full w-full pb-5 overflow-hidden">
+              <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full tranform"
+                style="transform-origin: top center; transform: scale(2);">
+                <path d="M0 25h25L75 0h25v50H0z" fill="#283046"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-8">
+
+          <!-- Heading -->
+          <h2 class="text-3xl mb-2">
+            SEO Masterclass
+          </h2>
+
+          <!-- Name & Date -->
+          <p class="mb-0">
+            Mentor Genesis ·
+            <span class="text-gray-400">February 20, 2024</span>
+          </p>
+
+        </div>
+
+      </a>
+      <!-- Example 2 -->
+      <a href="#"
+        class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+
+        <!-- Image -->
+        <img class="card-img-top rounded-tl-2xl w-full max-w-full h-auto" src="https://firebasestorage.googleapis.com/v0/b/ces-project-f8b4e.firebasestorage.app/o/received_532718509785365.png?alt=media&token=938be78c-9ec8-44d0-9057-276e32d82666" alt="Life Coaching Session by Coach Kristov">
+
+        <!-- Shape -->
+        <div class="relative">
+          <div class="absolute pointer-events-none bottom-full w-full bg-secondary text-white">
+            <div class="absolute bottom-full w-full pb-5 overflow-hidden">
+              <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full tranform"
+                style="transform-origin: top center; transform: scale(2);">
+                <path d="M0 25h25L75 0h25v50H0z" fill="#283046"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-8">
+
+          <!-- Heading -->
+          <h2 class="text-3xl mb-2">
+            Building a Powerful Mindset
+          </h2>
+
+          <!-- Name & Date -->
+          <p class="mb-0">
+            Coach Kristov ·
+            <span class="text-gray-400">March 31, 2024</span>
+          </p>
+
+        </div>
+
+      </a>
+      <!-- Example 3 -->
+      <a href="#"
+        class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+
+        <!-- Image -->
+         <img class="card-img-top rounded-tl-2xl w-full max-w-full h-auto"  src="https://firebasestorage.googleapis.com/v0/b/ces-project-f8b4e.firebasestorage.app/o/received_648926594459944.png?alt=media&token=a0b44150-f55f-4e08-8cc8-446fccbce0aa" alt="Marketing Tool Demo by Lifecoach Cecil">
+
+        <!-- Shape -->
+        <div class="relative">
+          <div class="absolute pointer-events-none bottom-full w-full bg-secondary text-white">
+            <div class="absolute bottom-full w-full pb-5 overflow-hidden">
+              <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full tranform"
+                style="transform-origin: top center; transform: scale(2);">
+                <path d="M0 25h25L75 0h25v50H0z" fill="#283046"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-8">
+
+          <!-- Heading -->
+          <h2 class="text-3xl mb-2">
+            Social Media Analytics Pro
+          </h2>
+
+          <!-- Name & Date -->
+          <p class="mb-0">
+            Lifecoach Cecil Domingo ·
+            <span class="text-gray-400">April 15, 2024</span>
+          </p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Auth Modal -->
+  <div class="fixed z-50 inset-0 overflow-y-auto hidden" id="modal">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center
+      sm:block sm:p-0">
+      <!-- Modal BG Overlay -->
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
+      </div>
+
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">​</span>
+
+      <div class="inline-block align-bottom bg-secondary rounded-lg text-left overflow-hidden
+        shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center pb-4">
+            <p class="text-2xl font-bold">Your Account</p>
+            <!-- Modal Close Button -->
+            <div class="modal-close cursor-pointer z-50">
+              ✕
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <ul class="flex flex-wrap mb-4">
+            <li class="flex-auto text-center">
+              <a class="block rounded py-3 px-4 transition hover:text-white text-white
+                bg-indigo-400" href="#">Login</a>
+            </li>
+            <li class="flex-auto text-center">
+              <a class="block rounded py-3 px-4 transition hover:text-indigo-400"
+                href="#">Register</a>
+            </li>
+          </ul>
+
+          <!-- Login Form -->
+          <form>
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Email</label>
+              <input type="email"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent
+                  focus:border-indigo-400"
+                placeholder="Enter Email" />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Password</label>
+              <input type="password"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Password" />
+            </div>
+            <button type="submit"
+              class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
+                hover:bg-indigo-500">
+              Submit
+            </button>
+          </form>
+          <!-- Registration Form -->
+          <form style = "display:none">
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Name</label>
+              <input type="text"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Enter Name" />
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Email</label>
+              <input type="email"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Enter Email" />
+            </div>
+            <!-- Age -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Age</label>
+              <input type="number"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400" />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Password</label>
+              <input type="password"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Password" />
+            </div>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Confirm Password</label>
+              <input type="password"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Confirm Password" />
+            </div>
+            <!-- Phone Number -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Phone Number</label>
+              <input type="text"
+                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+                  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+                placeholder="Enter Phone Number" />
+            </div>
+            <button type="submit"
+              class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
+                hover:bg-indigo-500">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.querySelector('a[href="#"]'); // Selects the first "Login / Register" link
+    const closeModalBtn = document.querySelector('.modal-close');
+
+    // Function to open the modal
+    function openModal(e) {
+      e.preventDefault();  // Prevent default link behavior
+      modal.classList.remove('hidden');
+    }
+      // Function to close the modal
+    function closeModal(e) {
+      e.preventDefault();
+      modal.classList.add('hidden');
+    }
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Tab Switching
+    const tabs = document.querySelectorAll('.flex-wrap a');
+    const loginForm = document.querySelector('form:first-of-type'); // First form is login
+    const registerForm = document.querySelector('form:last-of-type'); // Second form is register
+
+    tabs.forEach((tab, index) => {
+    tab.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Remove active classes from all tabs
+        tabs.forEach(t => {
+          t.classList.remove('bg-indigo-400', 'text-white');
+          t.classList.add('text-indigo-400');
+        });
+
+
+        // Add active classes to clicked tab
+        tab.classList.add('bg-indigo-400', 'text-white');
+        tab.classList.remove('text-indigo-400');
+
+        // Show/hide forms based on tab index
+        if (index === 0) { // Login tab
+          loginForm.style.display = 'block';
+          registerForm.style.display = 'none';
+        } else { // Register tab
+          loginForm.style.display = 'none';
+          registerForm.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
